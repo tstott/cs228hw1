@@ -1,0 +1,130 @@
+package edu.iastate.cs228.hw1;
+
+import java.io.File; 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner; 
+import java.util.Random;
+import java.lang.String;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.nio.charset.Charset;
+import java.io.IOException;
+import java.lang.System;
+
+
+/**
+ * 
+ * The world is represented as a square grid of size width X width. 
+ *
+ */
+public class World {
+    private int width; // grid size: width X width 
+	
+    public Living[][] grid; 
+	
+    /*  Default constructor reads from a file 
+    **
+     */
+    public World(String inputFileName) throws FileNotFoundException {
+	Charset charset = Charset.forName("UTF_8N");
+	try{
+	    for (String line : Files.readAllLines(Paths.get(inputFileName), charset)) {
+		for (String part : line.split("\n| ")){
+		    
+		    
+		}}}
+	catch (IOException e){
+	    System.out.println("No File");}
+
+	// TODO 
+	// 
+	// Assumption: The input file is in correct format. 
+	// 
+	// You may create the grid world in the following steps: 
+	// 
+	// 1) Reads the first line to determine the width of the grid.
+	// 
+	// 2) Creates a grid object. 
+	// 
+	// 3) Fills in the grid according to the input file. 
+	// 
+	// Be sure to close the input file when you are done.
+    }
+	
+    /**
+     * Constructor that builds a w X w grid without initializing it. 
+     * @param width  the grid 
+     */
+    public World(int w){
+	grid = new Living[w][w];}
+       
+    public int getWidth(){
+	return width;}
+    
+    /**
+     * Initialize the world by randomly assigning to every square of the grid  
+     * one of BADGER, FOX, RABBIT, GRASS, or EMPTY.
+     */
+    public void randomInit(){
+	int r = 0,c = 0;
+	Random generator = new Random();
+	for(Living[] lives: grid){
+	    for(Living newlife : lives){
+		int lifeval = generator.nextInt(100);
+		if(lifeval < 10){
+		    newlife = new Badger(this,r,c,0);}
+		else if(lifeval < 20){
+		    newlife = new Fox(this,r,c,0);}
+		else if(lifeval < 50){
+		    newlife = new Rabbit(this,r,c,0);}
+		else if(lifeval < 80){
+		    newlife = new Grass(this,r,c);}
+		else
+		    newlife = new Empty(this,r,c);
+		++c;}
+	    ++r;}	    
+    }
+	
+	
+	/**
+	 * Write the world grid as a string according to the output format.
+	 */
+	@Override
+	public String toString()
+	{
+	    String visRep = "";
+	    
+	    for(Living[] lives: grid){
+		for(Living resident : lives){
+		    switch(resident.who()){
+		    case EMPTY: visRep += "E ";
+			break;
+		    case GRASS: visRep += "G ";
+			break;
+		    case RABBIT: visRep += "R ";
+			break;
+		    case FOX: visRep += "F ";
+			break;
+		    case BADGER: visRep += "B ";
+			break;}
+		    visRep += "/n";}}
+	    return visRep;}
+	
+	/**
+	 * Write the world grid to an output file.  Useful for a randomly generated world. 
+	 * @throws FileNotFoundException
+	 */
+	public void write(String outputFileName) throws FileNotFoundException{
+	    // TODO 
+		// 
+		// 1. Open the file. 
+		// 
+		// 2. Write to the file. The five life forms are represented by characters 
+		//    B, E, F, G, R. Leave one blank space in between. Examples are given in
+		//    the project description. 
+		// 
+		// 3. Close the file. 
+
+	}			
+}
