@@ -29,13 +29,28 @@ public class World {
     public World(String inputFileName) throws FileNotFoundException {
 	Charset charset = Charset.forName("UTF_8N");
 	int rowcount = 0, colcount = 0;
+	int filewid = 0;	
 	try{
-	    for (String line : Files.readAllLines(Paths.get(inputFileName), charset)) {
-		for (String part : line.split("\n| ")){
-		    switch(part){
-		    case B: grid[r][c]
-		    
-		}}}
+	    for ( String line : Files.readAllLines(Paths.get(inputFileName), charset)) {
+		if(rowcount == 0 && colcount == 0){
+		    grid = new Living[(int)Math.sqrt(line.length())][(int)Math.sqrt(line.length())];} // Creates initial grid with length of file.
+		for (String part : line.split("\n| ")){  //Takes care of putting objects into grid by reading out of file,
+		                                         //after seperating by space or new line.
+		    switch(part.toUpperCase()){
+		    case "B": grid[rowcount][colcount] = new Badger(this,rowcount,colcount,0);
+			break;
+		    case "F": grid[rowcount][colcount] = new Fox(this,rowcount,colcount,0);
+			break;
+		    case "G": grid[rowcount][colcount] = new Grass(this,rowcount,colcount);
+			break;
+		    case "R": grid[rowcount][colcount] = new Rabbit(this,rowcount,colcount,0);
+			break;
+		    case "E": grid[rowcount][colcount] = new Empty(this,rowcount,colcount);
+			break;}
+		    ++colcount;
+		    if(colcount == ((int)Math.sqrt(line.length()))){
+			++rowcount;
+			colcount = 0;}}}}
 	catch (IOException e){
 	    System.out.println("No File");}
 
@@ -52,7 +67,7 @@ public class World {
 	// 3) Fills in the grid according to the input file. 
 	// 
 	// Be sure to close the input file when you are done.
-    }
+	}
 	
     /**
      * Constructor that builds a w X w grid without initializing it. 
