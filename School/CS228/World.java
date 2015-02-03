@@ -28,10 +28,12 @@ public class World {
      */
     public World(String inputFileName) throws FileNotFoundException {
 	Charset charset = Charset.forName("UTF_8N");
+	int rowcount = 0, colcount = 0;
 	try{
 	    for (String line : Files.readAllLines(Paths.get(inputFileName), charset)) {
 		for (String part : line.split("\n| ")){
-		    
+		    switch(part){
+		    case B: grid[r][c]
 		    
 		}}}
 	catch (IOException e){
@@ -107,8 +109,8 @@ public class World {
 		    case FOX: visRep += "F ";
 			break;
 		    case BADGER: visRep += "B ";
-			break;}
-		    visRep += "/n";}}
+			break;}}
+		    visRep += "/n";}
 	    return visRep;}
 	
 	/**
