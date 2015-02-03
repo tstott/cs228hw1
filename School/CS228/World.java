@@ -93,8 +93,7 @@ public class World {
 	 * Write the world grid as a string according to the output format.
 	 */
 	@Override
-	public String toString()
-	{
+	public String toString(){
 	    String visRep = "";
 	    
 	    for(Living[] lives: grid){
