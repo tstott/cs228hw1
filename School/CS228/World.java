@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.charset.Charset;
 import java.io.IOException;
 import java.lang.System;
+import java.lang.Math;
 
 
 /**
@@ -134,15 +135,13 @@ public class World {
 	 * @throws FileNotFoundException
 	 */
 	public void write(String outputFileName) throws FileNotFoundException{
-	    // TODO 
-		// 
-		// 1. Open the file. 
-		// 
-		// 2. Write to the file. The five life forms are represented by characters 
-		//    B, E, F, G, R. Leave one blank space in between. Examples are given in
-		//    the project description. 
-		// 
-		// 3. Close the file. 
+	    try{
+	    PrintWriter writer = new PrintWriter(outputFileName + ".txt", "UTF-8");
+	    writer.println(this.toString());
+	    writer.close();}
+
+	    catch (IOException e){
+		System.out.println("File not found.");}
 
 	}			
 }
