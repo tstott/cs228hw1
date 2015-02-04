@@ -4,7 +4,8 @@ package edu.iastate.cs228.hw1;
 /** 
  * Empty squares are competed by various forms of life.
  */
-public class Empty extends Living {
+public class Empty extends Living {    
+    int[] pop = new int[5];
     
     public Empty (World w, int r, int c){
 	world = w;
@@ -20,8 +21,14 @@ public class Empty extends Living {
      * @return Living  life form in the next cycle.   
      */
     public Living next(World wNew){
-	// TODO 
-	// 
-	// See Living.java for an outline of the function. 
-	// See the project description for corresponding survival rules. 
-	return null; }}
+	world = wNew;
+	census(pop);
+	if(pop[RABBIT] > 1)
+	    return new Rabbit(world,row,column,0);
+	else if(pop[FOX] > 1)
+	    return new Fox(world,row,column,0);
+	else if(pop[BADGER] > 1)
+	    return new Badger(world,row,column,0);
+	else if(pop[GRASS] > 0)
+	    return new Grass(world,row,column);
+	else{return this;}}}

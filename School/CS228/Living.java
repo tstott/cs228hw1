@@ -36,21 +36,26 @@ public abstract class Living{
      * Censuses all life forms in the 3 X 3 neighborhood in a world. 
      * @param population  counts of all life forms
      */
-    protected void census(int population[]){	
+    protected void census(int[] population){	// Takes into account the borders and populations.
 	for(int i=-1;i < 2; ++i){
 	    for(int j=-1;j < 2; ++j){
-		if(i == 0 && j == 0){}else{
-		switch((world.grid[i][j]).who()){
-		case EMPTY: population[1] += 1;
-		    break;
-		case GRASS: population[3] += 1;
-		    break;
-		case RABBIT: population[4] += 1;
-		    break;
-		case FOX: population[2] += 1;
-		    break;
-		case BADGER: population[0] += 1;
-		    break;}}}}}
+		if(i == 0 && j == 0){}
+		else if(row == (world.getWidth()-1) && i == -1){}
+		else if(column == (world.getWidth()-1) && j == 1){}
+		else if(row == 0 && i == 1){}
+		else if(column == 0 && j == -1){}
+                else{
+		    switch((world.grid[row + i][column + j]).who()){
+		    case EMPTY: population[EMPTY] += 1;
+			break;
+		    case GRASS: population[GRASS] += 1;
+			break;
+		    case RABBIT: population[RABBIT] += 1;
+			break;
+		    case FOX: population[FOX] += 1;
+			break;
+		    case BADGER: population[BADGER] += 1;
+			break;}}}}}
 	
 
     /**
@@ -58,11 +63,6 @@ public abstract class Living{
      * @return State
      */
     public abstract State who();
-    // To be implemented in each class of Badger, Empty, Fox, Grass, and Rabbit. 
-    // 
-    // There are five states given in State.java. Include the prefix State in   
-    // the return value, e.g., return State.Fox instead of Fox.  
-	
 	
     /**
      * Determines the life form on the square in the next cycle.
