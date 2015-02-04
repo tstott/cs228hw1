@@ -33,7 +33,8 @@ public class World {
 	try{
 	    for ( String line : Files.readAllLines(Paths.get(inputFileName), charset)) {
 		if(rowcount == 0 && colcount == 0){
-		    grid = new Living[(int)Math.sqrt(line.length())][(int)Math.sqrt(line.length())];} // Creates initial grid with length of file.
+		    width = (int)Math.sqrt((line.replaceAll(" ", "")).replaceAll("/n","").length());
+		    grid = new Living[width][width];} // Creates initial grid with length of file without newlines or spaces, I am sure there is a better way, but I can't find it.
 		for (String part : line.split("\n| ")){  //Takes care of putting objects into grid by reading out of file,
 		                                         //after seperating by space or new line.
 		    switch(part.toUpperCase()){
@@ -48,7 +49,7 @@ public class World {
 		    case "E": grid[rowcount][colcount] = new Empty(this,rowcount,colcount);
 			break;}
 		    ++colcount;
-		    if(colcount == ((int)Math.sqrt(line.length()))){
+		    if(colcount == width){
 			++rowcount;
 			colcount = 0;}}}}
 	catch (IOException e){
@@ -74,7 +75,8 @@ public class World {
      * @param width  the grid 
      */
     public World(int w){
-	grid = new Living[w][w];}
+	grid = new Living[w][w];
+	width = w;}
        
     public int getWidth(){
 	return width;}
