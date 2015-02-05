@@ -1,0 +1,6 @@
+
+
+public class LivingTest{
+    @Test
+    public void censusTRTest(){
+	

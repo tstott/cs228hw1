@@ -36,7 +36,7 @@ public abstract class Living{
      * Censuses all life forms in the 3 X 3 neighborhood in a world. 
      * @param population  counts of all life forms
      */
-    protected void census(int[] population){	// Takes into account the borders and populations.
+    protected void census(int population[]){	// Takes into account the borders and populations.
 	for(int i=-1;i < 2; ++i){
 	    for(int j=-1;j < 2; ++j){
 		if(i == 0 && j == 0){}
@@ -46,15 +46,15 @@ public abstract class Living{
 		else if(column == 0 && j == -1){}
                 else{
 		    switch((world.grid[row + i][column + j]).who()){
-		    case EMPTY: population[EMPTY] += 1;
+		    case EMPTY: population[1] += 1;
 			break;
-		    case GRASS: population[GRASS] += 1;
+		    case GRASS: population[3] += 1;
 			break;
-		    case RABBIT: population[RABBIT] += 1;
+		    case RABBIT: population[4] += 1;
 			break;
-		    case FOX: population[FOX] += 1;
+		    case FOX: population[2] += 1;
 			break;
-		    case BADGER: population[BADGER] += 1;
+		    case BADGER: population[0] += 1;
 			break;}}}}}
 	
 
