@@ -3,7 +3,7 @@ package edu.iastate.cs228.hw1;
 
 
 
-/*
+/**@author Tate Stottmann
  * A rabbit eats grass and lives no more than three years.
  */
 public class Rabbit extends Living {

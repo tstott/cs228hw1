@@ -67,7 +67,7 @@ public class PredatorPrey{
 		break;
 	    case 2:
 		System.out.println("World input from file \n File Name: ");
-		fileName = scan.nextLine();
+		fileName = "grid1.txt";
 		System.out.println("Number of Cycles: ");
 		cycles = scan.nextInt();
 		initial = new World(fileName);

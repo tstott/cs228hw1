@@ -12,6 +12,7 @@ import java.nio.charset.Charset;
 import java.io.IOException;
 import java.lang.System;
 import java.lang.Math;
+import java.io.FileReader;
 
 
 /**
@@ -28,17 +29,18 @@ public class World {
     **
     */
     public World(String inputFileName) throws FileNotFoundException {
-	Charset charset = Charset.forName("UTF_8N");
+	FileReader in = new FileReader(inputFileName);
+	Scanner listin = new Scanner(in);
 	int rowcount = 0, colcount = 0;
 	int filewid = 0;	
-	try{
-	    for ( String line : Files.readAllLines(Paths.get(inputFileName), charset)) {
+	    while(listin.hasNextLine()){
+		String lineNext = listin.nextLine();
 		if(rowcount == 0 && colcount == 0){
-		    width = (int)Math.sqrt((line.replaceAll(" ", "")).replaceAll("\n","").length());
+		    width = (((listin.nextLine()).replaceAll(" ", "")).length());
 		    grid = new Living[width][width];} // Creates initial grid with length of file without newlines or spaces, I am sure there is a better way, but I can't find it.
-		for (String part : line.split("\n| ")){  //Takes care of putting objects into grid by reading out of file,
+	for (String lineElement: lineNext.split("\n| ")){  //Takes care of putting objects into grid by reading out of file,
 		                                         //after seperating by space or new line.
-		    switch(part.toUpperCase()){
+		    switch(lineElement.toUpperCase()){
 		    case "B": grid[rowcount][colcount] = new Badger(this,rowcount,colcount,0);
 			break;
 		    case "F": grid[rowcount][colcount] = new Fox(this,rowcount,colcount,0);
@@ -53,72 +55,70 @@ public class World {
 		    if(colcount == width){
 			++rowcount;
 			colcount = 0;}}}}
-	catch (IOException e){
-	    System.out.println("No File");}
 
-	// TODO 
-	// 
-	// Assumption: The input file is in correct format. 
-	// 
-	// You may create the grid world in the following steps: 
-	// 
-	// 1) Reads the first line to determine the width of the grid.
-	// 
-	// 2) Creates a grid object. 
-	// 
-	// 3) Fills in the grid according to the input file. 
-	// 
-	// Be sure to close the input file when you are done.
-    }
-	
-    /**
-     * Constructor that builds a w X w grid without initializing it. 
-     * @param width  the grid 
-     */
-    public World(int w){
-	grid = new Living[w][w];
-	width = w;}
+    // TODO 
+    // 
+    // Assumption: The input file is in correct format. 
+    // 
+    // You may create the grid world in the following steps: 
+    // 
+    // 1) Reads the first line to determine the width of the grid.
+    // 
+    // 2) Creates a grid object. 
+    // 
+    // 3) Fills in the grid according to the input file. 
+    // 
+    // Be sure to close the input file when you are done.
        
-    public int getWidth(){
-	return width;}
+	
+/**
+ * Constructor that builds a w X w grid without initializing it. 
+ * @param width  the grid 
+ */
+public World(int w){
+    grid = new Living[w][w];
+    width = w;}
+       
+public int getWidth(){
+    return width;}
     
-    /**
-     * Initialize the world by randomly assigning to every square of the grid  
-     * one of BADGER, FOX, RABBIT, GRASS, or EMPTY.
-     */
-    public void randomInit(){
-	int r = 0,c = 0;
-	Random generator = new Random();
-	for(r = 0;r < width;++r){
-	    for(c = 0;c < width;++c){
-		int lifeval = generator.nextInt(100);
-		if(lifeval < 10){
-		    this.grid[r][c] = new Badger(this,r,c,0);}
-		else if(lifeval < 20){
-		    this.grid[r][c] = new Fox(this,r,c,0);}
-		else if(lifeval < 50){
-		    this.grid[r][c] = new Rabbit(this,r,c,0);}
-		else if(lifeval < 80){
-		    this.grid[r][c] = new Grass(this,r,c);}
-		else
-		    this.grid[r][c] = new Empty(this,r,c);
-		++c;}
-	    ++r;}	    
-    }
+/**
+ * Initialize the world by randomly assigning to every square of the grid  
+ * one of BADGER, FOX, RABBIT, GRASS, or EMPTY.
+ */
+public void randomInit(){
+    int r = 0,c = 0;
+    Random generator = new Random();
+    for(r = 0;r < width;++r){
+	for(c = 0;c < width;++c){
+	    int lifeval = generator.nextInt(100);
+	    if(lifeval < 10){
+		this.grid[r][c] = new Badger(this,r,c,0);}
+	    else if(lifeval < 20){
+		this.grid[r][c] = new Fox(this,r,c,0);}
+	    else if(lifeval < 50){
+		this.grid[r][c] = new Rabbit(this,r,c,0);}
+	    else if(lifeval < 80){
+		this.grid[r][c] = new Grass(this,r,c);}
+	    else
+		this.grid[r][c] = new Empty(this,r,c);
+	    ++c;}
+	++r;}	    
+}
 	
 	
-    /**
-     * Write the world grid as a string according to the output format.
-     */
-    @Override
-    public String toString(){
-	String visRep = "";
+/**
+ * Write the world grid as a string according to the output format.
+ */
+@Override
+public String toString(){
+    String visRep = "";
 
-	for(int r = 0;r < width;++r){
-	    for(int c = 0;c < width;++c){
-		if(this.grid[r][c] == null)
-		 System.out.println("Null Here");
-		else{
+    for(int r = 0;r < width;++r){
+	for(int c = 0;c < width;++c){
+	    if(this.grid[r][c] == null)
+		System.out.println("Null Here");
+	    else{
 		switch((this.grid[r][c]).who()){
 		case EMPTY: visRep += "E ";
 		    break;
@@ -130,18 +130,18 @@ public class World {
 		    break;
 		case BADGER: visRep += "B ";
 		    break;}}}
-	    visRep += "\n";}
-	return visRep;}
+	visRep += "\n";}
+    return visRep;}
 	
-    /**
-     * Write the world grid to an output file.  Useful for a randomly generated world. 
-     * @throws FileNotFoundException
-     */
-    public void write(String outputFileName) throws FileNotFoundException{
-	try{
-	    PrintWriter writer = new PrintWriter(outputFileName, "UTF-8");
-	    writer.println(this.toString());
-	    writer.close();}
+/**
+ * Write the world grid to an output file.  Useful for a randomly generated world. 
+ * @throws FileNotFoundException
+ */
+public void write(String outputFileName) throws FileNotFoundException{
+    try{
+	PrintWriter writer = new PrintWriter(outputFileName, "UTF-8");
+	writer.println(this.toString());
+	writer.close();}
 
-	catch (IOException e){
-	    System.out.println("File not found.");}}}
+    catch (IOException e){
+	System.out.println("File not found.");}}}

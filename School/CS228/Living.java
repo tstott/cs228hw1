@@ -6,7 +6,7 @@ package edu.iastate.cs228.hw1;
 
 
 /**
- * 
+ * @author Tate Stottmann
  * Living refers to the life form occupying a square in a world grid. It is a 
  * superclass of Badger, Empty, Fox, Grass, and Rabbit, and has two abstract 
  * methods awaiting implementation. 
@@ -40,10 +40,10 @@ public abstract class Living{
 	for(int i=-1;i < 2; ++i){
 	    for(int j=-1;j < 2; ++j){
 		if(i == 0 && j == 0){}
-		else if(row == (world.getWidth()-1) && i == -1){}
-		else if(column == (world.getWidth()-1) && j == 1){}
-		else if(row == 0 && i == 1){}
-		else if(column == 0 && j == -1){}
+		else if(row == (world.getWidth()-1) && i == 1){}
+		else if(column == (world.getWidth()-1) && j == -1){}
+		else if(row == 0 && i == -1){}
+		else if(column == 0 && j == 1){}
                 else{
 		    switch((world.grid[row + i][column + j]).who()){
 		    case EMPTY: population[1] += 1;

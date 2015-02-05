@@ -1,7 +1,7 @@
 package edu.iastate.cs228.hw1;
 
 
-/**
+/**@author Tate Stottmann
  * Grass remains if more than rabbits in the neighborhood;
  * otherwise, it is eaten. 
  *

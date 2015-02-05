@@ -1,7 +1,7 @@
 package edu.iastate.cs228.hw1;
 
 
-/** 
+/** @author Tate Stottmann
  * Empty squares are competed by various forms of life.
  */
 public class Empty extends Living {    

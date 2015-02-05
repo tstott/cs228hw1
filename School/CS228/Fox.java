@@ -1,7 +1,7 @@
 package edu.iastate.cs228.hw1;
 
 
-/**
+/**@author Tate Stottmann
  * A fox eats rabbits and competes against a badger. 
  */
 public class Fox extends Living{
