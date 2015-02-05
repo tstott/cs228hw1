@@ -15,8 +15,13 @@ public class PredatorPrey {
 	 * @param wOld  old world
 	 * @param wNew  new world 
 	 */
-	public static void updateWorld(World wOld, World wNew)
-	{
+	public static void updateWorld(World wOld, World wNew){
+	    int oww = wOld.getWidth();
+	    wNew = new World(oww);
+	    for(int r = 0;r < oww;++r){
+		for(int c = 0;c < oww;++c){
+		    wNew.grid[r][c] = (wOld.grid[r][c]).next(wOld);}}}
+		
 		// TODO 
 		// 
 		// For every life form (i.e., a Living object) in the grid wOld, generate  
@@ -24,7 +29,6 @@ public class PredatorPrey {
 		// the former life form changes into the latter life form. 
 		// 
 		// Employ the method next() of the Living class. 
-	}
 	
 	/**
 	 * Repeatedly generates worlds either randomly or from reading files. 
