@@ -1,0 +1,58 @@
+cd projects
+mkdir my_projects
+ls
+cd my_projects/
+ls
+cd ../
+ls
+rm my_projects/
+rm -d my_projects/
+cd quicklisp/
+ls
+cd local-projects/
+ls
+sbcl
+cd quicklisp/local-projects/
+ls
+ls
+cd ../
+ls
+cd ../
+ls
+cd Land_of_Lisp/
+ls
+cd../
+cd ../
+cd quicklisp/local-projects/
+ls
+cd Land_of_Lisp/
+ls
+cd quicklisp/local-projects/
+ls
+cd quicklisp/local-projects/
+ls
+rm -dr Land_of_Lisp/
+rm -dr land-lisp/
+rm -dr land-lisp/
+rm -dr land-lisp/
+rm -dr land-lisp/
+ls
+ls
+cd test-projct/
+ls
+ls
+cd ../
+ls
+cd quicklisp/local-projects/ll
+cd quicklisp/local-projects/
+cd quicklisp/local-projects/
+cd quicklisp/
+ls
+cd tmp/
+ls
+cd ../
+ls
+cd quicklisp/
+ls
+cd ../
+ls
